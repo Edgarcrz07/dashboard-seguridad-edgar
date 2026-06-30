@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Seguridad de Apps - Edgar Cruz</title>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    <!-- Usar CDN más estable y con versión fija -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js">
     </script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <style>
-        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
@@ -29,7 +27,6 @@
             margin: 0 auto;
         }
 
-        /* HEADER */
         .header {
             background: linear-gradient(135deg, #0b1a2e 0%, #1a3a5c 100%);
             color: #fff;
@@ -46,7 +43,6 @@
         .header h1 {
             font-size: 24px;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         .header h1 i {
@@ -73,17 +69,16 @@
             margin-right: 8px;
         }
 
-        /* KPI CARDS */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 18px;
             margin-bottom: 25px;
         }
 
         .kpi-card {
             background: #fff;
-            padding: 22px 20px;
+            padding: 20px 18px;
             border-radius: 14px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             border-left: 5px solid #1a3a5c;
@@ -92,11 +87,10 @@
 
         .kpi-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
         }
 
         .kpi-card .label {
-            font-size: 13px;
+            font-size: 12px;
             color: #6b7a8f;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -104,20 +98,14 @@
         }
 
         .kpi-card .label i {
-            margin-right: 6px;
+            margin-right: 5px;
         }
 
         .kpi-card .value {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             color: #0b1a2e;
-            margin-top: 6px;
-        }
-
-        .kpi-card .value .currency {
-            font-size: 16px;
-            font-weight: 400;
-            color: #6b7a8f;
+            margin-top: 4px;
         }
 
         .kpi-card:nth-child(1) {
@@ -139,7 +127,6 @@
             border-left-color: #00838f;
         }
 
-        /* CHARTS ROW */
         .charts-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -168,7 +155,7 @@
 
         .chart-wrapper {
             position: relative;
-            height: 220px;
+            height: 200px;
         }
 
         .chart-full {
@@ -176,10 +163,9 @@
         }
 
         .chart-full .chart-wrapper {
-            height: 200px;
+            height: 180px;
         }
 
-        /* TABLE */
         .table-card {
             background: #fff;
             padding: 20px;
@@ -223,7 +209,6 @@
             color: #1a2332;
             cursor: pointer;
             outline: none;
-            transition: border 0.2s;
         }
 
         .filter-group select:focus {
@@ -240,14 +225,14 @@
             background: #f0f4f8;
             color: #1a2332;
             font-weight: 600;
-            padding: 12px 10px;
+            padding: 10px 8px;
             text-align: left;
             border-bottom: 2px solid #d0d7e2;
             white-space: nowrap;
         }
 
         tbody td {
-            padding: 10px 10px;
+            padding: 8px 8px;
             border-bottom: 1px solid #e8ecf0;
             color: #1a2332;
         }
@@ -258,7 +243,7 @@
 
         .severity-badge {
             display: inline-block;
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
@@ -284,7 +269,7 @@
 
         .status-badge {
             display: inline-block;
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
@@ -311,28 +296,29 @@
             color: #c62828;
         }
 
-        /* RESPONSIVE */
+        .loading-msg {
+            text-align: center;
+            padding: 40px;
+            color: #6b7a8f;
+        }
+
         @media (max-width: 900px) {
             .charts-row {
                 grid-template-columns: 1fr;
             }
-
             .header {
                 flex-direction: column;
                 text-align: center;
                 gap: 12px;
             }
-
             .header h1 {
                 font-size: 20px;
             }
-
             .kpi-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             }
-
             .kpi-card .value {
-                font-size: 22px;
+                font-size: 20px;
             }
         }
 
@@ -340,60 +326,36 @@
             body {
                 padding: 10px;
             }
-
             .header {
-                padding: 18px;
+                padding: 15px;
             }
-
             .header h1 {
-                font-size: 17px;
+                font-size: 16px;
             }
-
             .kpi-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
-
             .kpi-card {
-                padding: 14px;
+                padding: 12px;
             }
-
             .kpi-card .value {
-                font-size: 18px;
+                font-size: 16px;
             }
-
             .filter-group {
                 flex-direction: column;
                 width: 100%;
             }
-
             .filter-group select {
                 width: 100%;
             }
-
             table {
-                font-size: 11px;
+                font-size: 10px;
             }
-
             thead th,
             tbody td {
-                padding: 6px 6px;
+                padding: 4px 4px;
             }
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f0f4f8;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #b0c4de;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #1a3a5c;
         }
     </style>
 </head>
@@ -401,7 +363,7 @@
 
     <div class="container">
 
-        <!-- ===== HEADER ===== -->
+        <!-- HEADER -->
         <div class="header">
             <div>
                 <h1><i class="fas fa-shield-alt"></i> Desarrollo Seguro de Aplicaciones</h1>
@@ -412,12 +374,12 @@
             </div>
         </div>
 
-        <!-- ===== KPI CARDS ===== -->
+        <!-- KPIS -->
         <div class="kpi-grid" id="kpiContainer">
-            <!-- Los KPI se llenan con JS -->
+            <div class="loading-msg" style="grid-column:1/-1;">Cargando indicadores...</div>
         </div>
 
-        <!-- ===== CHARTS ROW ===== -->
+        <!-- CHARTS -->
         <div class="charts-row">
             <div class="chart-card">
                 <h3><i class="fas fa-chart-pie"></i> Distribución por Severidad</h3>
@@ -442,7 +404,7 @@
             </div>
         </div>
 
-        <!-- ===== TABLE ===== -->
+        <!-- TABLA -->
         <div class="table-card">
             <div class="table-header">
                 <h3><i class="fas fa-list"></i> Detalle de Vulnerabilidades</h3>
@@ -472,13 +434,13 @@
                             <th>Severidad</th>
                             <th>Estado</th>
                             <th>Fecha Detección</th>
-                            <th>Días Resolución</th>
+                            <th>Días Res.</th>
                             <th>Costo (L)</th>
                             <th>Tipo Defecto</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <!-- JS llena la tabla -->
+                        <tr><td colspan="10" style="text-align:center;padding:20px;color:#6b7a8f;">Cargando datos...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -487,19 +449,15 @@
             </div>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <div class="footer">
             <i class="fas fa-shield-alt"></i> Dashboard de Desarrollo Seguro de Aplicaciones &mdash; Edgar Cruz &bull; Diplomado en Inteligencia Artificial &bull; UTH
         </div>
 
     </div>
 
-    <!-- ============================================================ -->
-    <!-- JAVASCRIPT -->
-    <!-- ============================================================ -->
     <script>
         // ================================================================
-        // 1. DATOS
+        // DATOS
         // ================================================================
         const TIPO_CAMBIO = 24.50;
 
@@ -543,32 +501,22 @@
         ];
 
         // ================================================================
-        // 2. UTILIDADES
+        // UTILIDADES
         // ================================================================
-        function usdToLps(usd) {
-            return Math.round(usd * TIPO_CAMBIO);
-        }
+        function usdToLps(usd) { return Math.round(usd * TIPO_CAMBIO); }
 
-        function formatLps(value) {
-            return 'L ' + value.toLocaleString('es-HN');
-        }
+        function formatLps(value) { return 'L ' + value.toLocaleString('es-HN'); }
 
         function getSeverityClass(sev) {
-            const map = {
-                'Crítica': 'severity-critica',
-                'Alta': 'severity-alta',
-                'Media': 'severity-media',
-                'Baja': 'severity-baja'
-            };
+            const map = { 'Crítica': 'severity-critica', 'Alta': 'severity-alta', 'Media': 'severity-media',
+                'Baja': 'severity-baja' };
             return map[sev] || '';
         }
 
-        function getStatusClass(st) {
-            return st === 'Abierta' ? 'status-abierta' : 'status-cerrada';
-        }
+        function getStatusClass(st) { return st === 'Abierta' ? 'status-abierta' : 'status-cerrada'; }
 
         // ================================================================
-        // 3. FILTROS
+        // FILTROS
         // ================================================================
         let currentFilterSeveridad = '';
         let currentFilterEstado = '';
@@ -582,7 +530,7 @@
         }
 
         // ================================================================
-        // 4. RENDER KPI
+        // RENDER KPI
         // ================================================================
         function renderKPI() {
             const total = vulnerabilidades.length;
@@ -619,7 +567,7 @@
         }
 
         // ================================================================
-        // 5. RENDER TABLE
+        // RENDER TABLE
         // ================================================================
         function renderTable() {
             const data = getFilteredData();
@@ -627,7 +575,7 @@
 
             if (data.length === 0) {
                 tbody.innerHTML =
-                    `<tr><td colspan="10" style="text-align:center;padding:30px;color:#6b7a8f;">No hay vulnerabilidades que coincidan con los filtros seleccionados.</td></tr>`;
+                    `<tr><td colspan="10" style="text-align:center;padding:30px;color:#6b7a8f;">No hay vulnerabilidades con esos filtros.</td></tr>`;
                 return;
             }
 
@@ -648,19 +596,16 @@
         }
 
         // ================================================================
-        // 6. CHARTS
+        // CHARTS
         // ================================================================
         let chartSeveridad, chartAplicacion, chartCosto;
 
         function renderCharts() {
             const data = getFilteredData();
 
-            // --- Severidad (Doughnut) ---
+            // Severidad
             const sevCount = { 'Crítica': 0, 'Alta': 0, 'Media': 0, 'Baja': 0 };
-            data.forEach(v => {
-                if (sevCount[v.severidad] !== undefined) sevCount[v.severidad]++;
-            });
-
+            data.forEach(v => { if (sevCount[v.severidad] !== undefined) sevCount[v.severidad]++; });
             const sevLabels = Object.keys(sevCount);
             const sevValues = Object.values(sevCount);
             const colores = ['#c62828', '#e65100', '#f57f17', '#2e7d32'];
@@ -669,26 +614,13 @@
             const ctx1 = document.getElementById('severidadChart').getContext('2d');
             chartSeveridad = new Chart(ctx1, {
                 type: 'doughnut',
-                data: {
-                    labels: sevLabels,
-                    datasets: [{
-                        data: sevValues,
-                        backgroundColor: colores,
-                        borderWidth: 2,
-                        borderColor: '#fff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
-                    },
-                    cutout: '65%'
-                }
+                data: { labels: sevLabels, datasets: [{ data: sevValues, backgroundColor: colores, borderWidth: 2,
+                        borderColor: '#fff' }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom',
+                            labels: { boxWidth: 12, font: { size: 10 } } } }, cutout: '65%' }
             });
 
-            // --- Aplicación (Barra) ---
+            // Aplicación
             const appMap = {};
             data.forEach(v => { appMap[v.app] = (appMap[v.app] || 0) + 1; });
             const appLabels = Object.keys(appMap);
@@ -699,29 +631,14 @@
             const ctx2 = document.getElementById('aplicacionChart').getContext('2d');
             chartAplicacion = new Chart(ctx2, {
                 type: 'bar',
-                data: {
-                    labels: appLabels,
-                    datasets: [{
-                        label: 'Incidencias',
-                        data: appValues,
-                        backgroundColor: appColores.slice(0, appLabels.length),
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 10 } } },
-                        x: { ticks: { font: { size: 10 } } }
-                    }
-                }
+                data: { labels: appLabels, datasets: [{ label: 'Incidencias', data: appValues,
+                        backgroundColor: appColores.slice(0, appLabels.length), borderRadius: 6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } } } }
             });
 
-            // --- Costo por Severidad (Lempiras) ---
+            // Costo
             const costoMap = {};
             data.forEach(v => {
                 const sev = v.severidad;
@@ -736,37 +653,17 @@
             const ctx3 = document.getElementById('costoChart').getContext('2d');
             chartCosto = new Chart(ctx3, {
                 type: 'bar',
-                data: {
-                    labels: costLabels,
-                    datasets: [{
-                        label: 'Costo (Lempiras)',
-                        data: costValues,
-                        backgroundColor: costColores.slice(0, costLabels.length),
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) { return 'L ' + value.toLocaleString('es-HN'); },
-                                font: { size: 10 }
-                            }
-                        },
-                        x: { ticks: { font: { size: 11 } } }
-                    }
-                }
+                data: { labels: costLabels, datasets: [{ label: 'Costo (Lempiras)', data: costValues,
+                        backgroundColor: costColores.slice(0, costLabels.length), borderRadius: 6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: function(value) { return 'L ' + value
+                                    .toLocaleString('es-HN'); }, font: { size: 10 } } },
+                        x: { ticks: { font: { size: 11 } } } } }
             });
         }
 
         // ================================================================
-        // 7. ACTUALIZAR TODO
+        // ACTUALIZAR TODO
         // ================================================================
         function updateDashboard() {
             renderKPI();
@@ -775,7 +672,7 @@
         }
 
         // ================================================================
-        // 8. EVENTOS DE FILTROS
+        // EVENTOS
         // ================================================================
         document.getElementById('filterSeveridad').addEventListener('change', function() {
             currentFilterSeveridad = this.value;
@@ -788,10 +685,23 @@
         });
 
         // ================================================================
-        // 9. INICIALIZAR
+        // INICIALIZAR
         // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
-            updateDashboard();
+            // Verificar que Chart.js esté cargado
+            if (typeof Chart !== 'undefined') {
+                updateDashboard();
+            } else {
+                // Si no carga, reintentar después de 1 segundo
+                setTimeout(function() {
+                    if (typeof Chart !== 'undefined') {
+                        updateDashboard();
+                    } else {
+                        document.getElementById('kpiContainer').innerHTML =
+                            '<div class="loading-msg" style="grid-column:1/-1;color:#c62828;"><i class="fas fa-exclamation-circle"></i> Error al cargar las librerías. Recarga la página.</div>';
+                    }
+                }, 1000);
+            }
         });
     </script>
 
